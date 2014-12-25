@@ -1,11 +1,3 @@
-                   __     _ _     
-                   \ \   (_) |    
-   __ _ _   ___  __ \ \   _| |__  
-  / _` | | | \ \/ /  > \ | | '_ \ 
- | (_| | |_| |>  <  / ^ \| | |_) |
-  \__,_|\__,_/_/\_\/_/ \_\_|_.__/ 
-                                  
-
 ## auxlib: auxiliary libraries
 
 auxlib is a collection of utility libraries, written in [Scala programming language](http://www.scala-lang.org).
@@ -15,7 +7,7 @@ auxlib is a collection of utility libraries, written in [Scala programming langu
 
 This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions; See the [GNU Lesser General Public License v3 for more details](http://www.gnu.org/licenses/lgpl-3.0.html).
 
-## auxlib libraries
+## auxlib sub-libraries
 
 The auxlib is composed of the following utility libraries:
 
