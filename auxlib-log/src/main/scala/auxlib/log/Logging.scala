@@ -39,7 +39,6 @@ trait Logging {
   // Lazy initialization of logger instance, using the current class name as logger name
   protected lazy val loggerInstance: Logger = Logger(getClass.getName)
 
-
   /**
    * Log debug messages only when debug is enabled, otherwise the message is ignored.
    *
@@ -88,7 +87,6 @@ trait Logging {
    */
   protected def warn(message: => String) = loggerInstance.warn(message)
 
-
   /**
    * Log warning messages (only when warning messages are enabled, otherwise the message is ignored) accompanied with
    * the thrown exception.
@@ -98,7 +96,6 @@ trait Logging {
    */
   protected def warn(message: => String, ex: => Throwable) = loggerInstance.warn(message, ex)
 
-
   /**
    * Log error messages (only when error messages are enabled, otherwise the message is ignored) accompanied with
    * the thrown exception.
@@ -106,7 +103,6 @@ trait Logging {
    * @param message: the error message to log
    */
   protected def error(message: => String) = loggerInstance.error(message)
-
 
   /**
    * Log error messages (only when error messages are enabled, otherwise the message is ignored) accompanied with
@@ -116,7 +112,6 @@ trait Logging {
    * @param ex: the thrown exception to log
    */
   protected def error(message: => String, ex: => Throwable) = loggerInstance.error(message, ex)
-
 
   /**
    * Logs the given message and exits with exit code '1'
@@ -134,7 +129,6 @@ trait Logging {
    */
   protected def fatal(message: => String, ex: => Throwable, exitCode: Int = 1) = loggerInstance.fatal(message, ex, exitCode)
 
-
   /**
    * Log a trace message
    *
@@ -143,7 +137,6 @@ trait Logging {
    * @see <a href="http://www.slf4j.org/faq.html#trace">www.slf4j.org/faq.html#trace</a>
    */
   protected def trace(message: => String) = loggerInstance.trace(message)
-
 
   /**
    * Log trace message and exception
@@ -154,7 +147,6 @@ trait Logging {
    * @see <a href="http://www.slf4j.org/faq.html#trace">www.slf4j.org/faq.html#trace</a>
    */
   protected def trace(message: => String, ex: => Throwable) = loggerInstance.trace(message, ex)
-
 
   /**
    * Determine whether INFO log messages are enabled in logger's configuration/runtime.
@@ -198,6 +190,39 @@ trait Logging {
    */
   protected def isDebugEnabled = loggerInstance.isDebugEnabled
 
+  /**
+   * Execute the given body when info is enabled
+   *
+   * @param body code to execute
+   */
+  protected def whenInfo(body: => Unit): Unit = if (loggerInstance.isInfoEnabled) body
 
-  def whenDebug(body: => Unit): Unit = if (loggerInstance.isDebugEnabled) body
+  /**
+   * Execute the given body when warn is enabled
+   *
+   * @param body code to execute
+   */
+  protected def whenWarn(body: => Unit): Unit = if (loggerInstance.isWarnEnabled) body
+
+  /**
+   * Execute the given body when error is enabled
+   *
+   * @param body code to execute
+   */
+  protected def whenError(body: => Unit): Unit = if (loggerInstance.isErrorEnabled) body
+
+  /**
+   * Execute the given body when trace is enabled
+   *
+   * @param body code to execute
+   */
+  protected def whenTrace(body: => Unit): Unit = if (loggerInstance.isTraceEnabled) body
+
+  /**
+   * Execute the given body when debug is enabled
+   *
+   * @param body code to execute
+   */
+  protected def whenDebug(body: => Unit): Unit = if (loggerInstance.isDebugEnabled) body
+
 }
