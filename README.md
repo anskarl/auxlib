@@ -33,10 +33,10 @@ In order to build auxlib from source, you need to have Java (at least version 6)
 $ sbt compile
 ```
 
-##### To publish all sub-libraries to your local maven repository, type the following command:
+##### To publish all sub-libraries to your local Apache Ivy directory (e.g., inside ~/.ivy2/local/), type the following command:
 
 ```
-$ sbt publish
+$ sbt publishLocal
 ```
 
 ## Cross-building
@@ -55,15 +55,15 @@ $ sbt ++2.11.4 compile
 $ sbt +compile
 ```
 
-##### To publish all sub-libraries for both Scala 2.10.4 and 2.11.4 to your local maven repository, type the following command:
+##### To publish all sub-libraries for both Scala 2.10.4 and 2.11.4 to your local Apache Ivy directory, type the following command:
 
 ```
-$ sbt ++2.11.4 publish
+$ sbt ++2.11.4 publishLocal
 ```
 
-##### To publish all sub-libraries for both Scala 2.10.4 and 2.11.4 to your local maven repository, type the following command:
+##### To publish all sub-libraries for both Scala 2.10.4 and 2.11.4 to your local Apache Ivy directory, type the following command:
 
 ```
-$ sbt +publish
+$ sbt +publishLocal
 ```
 
