@@ -143,7 +143,6 @@ class Logger protected(val instance: org.slf4j.Logger) {
   final def warn(message: => String): Unit =
     if (instance.isWarnEnabled) instance.warn(message)
 
-
   /**
    * Log warning messages (only when warning messages are enabled, otherwise the message is ignored) accompanied with
    * the thrown exception.
@@ -154,7 +153,6 @@ class Logger protected(val instance: org.slf4j.Logger) {
   @inline
   final def warn(message: => String, ex: => Throwable) =
     if (instance.isWarnEnabled) instance.warn(message, ex)
-
 
   /**
    * Log error messages (only when error messages are enabled, otherwise the message is ignored) accompanied with
@@ -270,5 +268,40 @@ class Logger protected(val instance: org.slf4j.Logger) {
    * @return true when DEBUG log messages are enabled, otherwise false.
    */
   def isDebugEnabled = instance.isDebugEnabled
+
+  /**
+   * Execute the given body when info is enabled
+   *
+   * @param body code to execute
+   */
+  def whenInfo(body: => Unit): Unit = if (instance.isInfoEnabled) body
+
+  /**
+   * Execute the given body when warn is enabled
+   *
+   * @param body code to execute
+   */
+  def whenWarn(body: => Unit): Unit = if (instance.isWarnEnabled) body
+
+  /**
+   * Execute the given body when error is enabled
+   *
+   * @param body code to execute
+   */
+  def whenError(body: => Unit): Unit = if (instance.isErrorEnabled) body
+
+  /**
+   * Execute the given body when trace is enabled
+   *
+   * @param body code to execute
+   */
+  def whenTrace(body: => Unit): Unit = if (instance.isTraceEnabled) body
+
+  /**
+   * Execute the given body when debug is enabled
+   *
+   * @param body code to execute
+   */
+  def whenDebug(body: => Unit): Unit = if (instance.isDebugEnabled) body
 
 }

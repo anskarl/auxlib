@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-  <conversionRule conversionWord="highlightex" converterClass="auxlib.log.LogColouredHighlighter" />
+  <conversionRule conversionWord="highlightex" converterClass="auxlib.log.LogbackColouredHighlighter" />
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-    <!-- On Windows machines setting withJansi to true enables ANSI
-         color code interpretation by the Jansi library. This requires
-         org.fusesource.jansi:jansi:1.8 on the class path.  Note that
-         Unix-based operating systems such as Linux and Mac OS X
-         support ANSI color codes by default. -->
+    <!--
+    On Windows machines setting withJansi to true enables ANSI
+    color code interpretation by the Jansi library. This requires
+    org.fusesource.jansi:jansi:1.8 on the class path.  Note that
+    Unix-based operating systems such as Linux and Mac OS X
+    support ANSI color codes by default.
+    -->
     <withJansi>true</withJansi>
     <encoder>
       <pattern>%highlightex([%-5p] %m%n)</pattern>
@@ -16,12 +18,12 @@
     </filter>-->
   </appender>
   <!--<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <File>report.log</File>
+    <File>auxlib.log</File>
     <encoder>
       <pattern>[%-5p] %d %c: %m%n</pattern>
     </encoder>
   </appender>-->
-  <root level="INFO">
+  <root level="DEBUG">
     <appender-ref ref="CONSOLE"/>
     <!--<appender-ref ref="FILE"/>-->
   </root>

@@ -35,16 +35,10 @@ import scala.annotation.switch
 /**
  * @author Anastasios Skarlatidis
  */
-final class LogColouredHighlighter extends ForegroundCompositeConverterBase[ILoggingEvent]{
-  private val DEFAULT_FG: String = "39"
-  private val STYLE_ERROR = "31" // Red
-  private val STYLE_WARN = "33" // Orange
-  private val STYLE_INFO = "32" // Green
-  private val STYLE_DEBUG = "35" // Magenta
-  private val STYLE_TRACE = "35" // Magenta
+final class LogbackColouredHighlighter extends ForegroundCompositeConverterBase[ILoggingEvent] {
 
   override def getForegroundColorCode(event: ILoggingEvent): String =
-    ( event.getLevel.toInt: @switch) match {
+    ( event.getLevel.levelInt: @switch) match {
       case Level.ERROR_INT => STYLE_ERROR
       case Level.WARN_INT => STYLE_WARN
       case Level.INFO_INT => STYLE_INFO
@@ -52,7 +46,5 @@ final class LogColouredHighlighter extends ForegroundCompositeConverterBase[ILog
       case Level.TRACE_INT => STYLE_TRACE
       case _ => DEFAULT_FG
     }
-
-
 
 }
