@@ -21,5 +21,49 @@ A collection of utility classes and functions for Scala friendly interoperabilty
 
 ##### auxlib-log
 
-A simple Utility library for logging that employs the [slf4j](http://www.slf4j.org).
+A simple utility library for logging that employs the [slf4j](http://www.slf4j.org).
+
+## Instructions to build sub-libraries from source
+
+In order to build auxlib from source, you need to have Java (at least version 6) and [sbt](http://www.scala-sbt.org) installed in your system.
+
+##### To start building all sub-libraries, type the following command:
+
+```
+$ sbt compile
+```
+
+##### To publish all sub-libraries to your local maven repository, type the following command:
+
+```
+$ sbt publish
+```
+
+## Cross-building
+
+By default compile and publish produce auxlib-* jars for Scala 2.10.4. This project supports cross-building for both Scala 2.10.4 and 2.11.4 (for details see [sbt documentation](http://www.scala-sbt.org/0.13.5/docs/Detailed-Topics/Cross-Build.html)). In sbt you can use ++ <version> to temporarily switch the Scala version currently being used to build.
+
+##### To start building all sub-libraries only for Scala 2.11.4, type the following command:
+
+```
+$ sbt ++2.11.4 compile
+```
+
+##### To start building all sub-libraries for both Scala 2.10.4 and 2.11.4, type the following command:
+
+```
+$ sbt +compile
+```
+
+##### To publish all sub-libraries for both Scala 2.10.4 and 2.11.4 to your local maven repository, type the following command:
+
+```
+$ sbt ++2.11.4 publish
+```
+
+##### To publish all sub-libraries for both Scala 2.10.4 and 2.11.4 to your local maven repository, type the following command:
+
+```
+$ sbt +publish
+```
 
