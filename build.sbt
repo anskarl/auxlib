@@ -10,7 +10,7 @@ publish := { }
 lazy val root =
 	Project(id = "auxlib", base = file("."))
 		.aggregate (auxlibOpt, auxlibLog, auxlibTrove)
-		.dependsOn (auxlibOpt, auxlibLog, auxlibTrove, auxlibExamples)
+		.dependsOn (auxlibOpt, auxlibLog, auxlibTrove)
 
 // auxlib-opt
 lazy val auxlibOpt =
@@ -29,8 +29,8 @@ lazy val auxlibTrove =
 
 
 // auxlib-examples
-lazy val auxlibExamples =
-	Project(id = "auxlib-examples", base = file("examples"))
-		.dependsOn (auxlibOpt, auxlibLog, auxlibTrove)
+//lazy val auxlibExamples =
+//	Project(id = "auxlib-examples", base = file("examples"))
+//		.dependsOn (auxlibOpt, auxlibLog, auxlibTrove)
 
 
