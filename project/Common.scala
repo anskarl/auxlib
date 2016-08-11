@@ -5,11 +5,11 @@ object Common {
 
   val settings: Seq[Setting[_]] = Seq(
 
-    version := "0.1",
+    version := "0.2-SNAPSHOT",
 
     organization := "com.github.anskarl",
 
-    crossScalaVersions := Seq("2.10.6", "2.11.7"),
+    crossScalaVersions := Seq("2.11.7", "2.10.6"),
 
     autoScalaLibrary := true,
 

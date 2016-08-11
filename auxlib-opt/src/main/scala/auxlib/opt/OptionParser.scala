@@ -135,15 +135,12 @@ trait OptionParser {
   protected val programName: Option[String] = None
   protected val errorOnUnknownArgument: Boolean = true
 
+  private final val MAX_TXT_LENGTH = 72 //chars
+
+  private final val wrap = (txt: String) => wrapText(txt, MAX_TXT_LENGTH)
+
   private val options = new ListBuffer[OptionDefinition]
   private val arguments = new ListBuffer[Argument]
-  private val NL = System.getProperty("line.separator")
-  private val TB = "        " //8 whitespace chars
-  private val NLTB = NL + TB
-  private val NLNL = NL + NL
-  private val MAX_TXT_LENGTH = 72 //chars
-  private val defaultKeyName = "<key>"
-  private val defaultValueName = "<value>"
   private var argList: Option[Argument] = None
 
   // -------- Defining options ---------------
@@ -246,28 +243,15 @@ trait OptionParser {
   }
 
 
-  def wrapText(description: String): String = {
-    if(description.length < MAX_TXT_LENGTH) description
-    else if(description.substring(0,MAX_TXT_LENGTH).contains(NL)){
-      val idxNL = description.indexOf(NL)
-      description.substring(0, idxNL).trim() +NLTB+wrapText(description.substring(idxNL+1).trim())
-    }
-    else{
-      val idx = math.max(math.max(description.lastIndexOf(" ", MAX_TXT_LENGTH), description.lastIndexOf(TB,MAX_TXT_LENGTH)), description.lastIndexOf("-",MAX_TXT_LENGTH))
-      description.substring(0, idx).trim()+NLTB+wrapText(description.substring(idx).trim())
-    }
-
-  }
-
   // -------- Getting usage information ---------------
   def descriptions: Seq[String] = options.map {
-    case x if !x.canBeInvoked => wrapText(x.description)
-    case x if x.keyValueArgument => "[-" + x.shortopt + ", --" + x.longopt + ":" + x.keyName + "=" + x.valueName + "]" + NLTB + wrapText(x.description)
-    case x if x.gobbleNextArgument => "[-" + x.shortopt + ", --" + x.longopt + " " + x.valueName + "]" + NLTB + wrapText(x.description)
-    case opt => "[-" + opt.shortopt + ", " + "--" + opt.longopt + "]" + NLTB + wrapText(opt.description)
+    case x if !x.canBeInvoked => wrap(x.description)
+    case x if x.keyValueArgument => "[-" + x.shortopt + ", --" + x.longopt + ":" + x.keyName + "=" + x.valueName + "]" + NLTB + wrap(x.description)
+    case x if x.gobbleNextArgument => "[-" + x.shortopt + ", --" + x.longopt + " " + x.valueName + "]" + NLTB + wrap(x.description)
+    case opt => "[-" + opt.shortopt + ", " + "--" + opt.longopt + "]" + NLTB + wrap(opt.description)
   } ++= (argList match {
-    case Some(x: Argument) => List(x.valueName + NLTB + wrapText(x.description))
-    case None => arguments.map(a => a.valueName + NLTB + wrapText(a.description))
+    case Some(x: Argument) => List(x.valueName + NLTB + wrap(x.description))
+    case None => arguments.map(a => a.valueName + NLTB + wrap(a.description))
   })
 
   def usage: String = {
