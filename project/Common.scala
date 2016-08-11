@@ -5,7 +5,7 @@ object Common {
 
   val settings: Seq[Setting[_]] = Seq(
 
-    version := "0.2-SNAPSHOT",
+    version := "0.2.0",
 
     organization := "com.github.anskarl",
 
