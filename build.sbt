@@ -1,36 +1,24 @@
-// project name
-name := "auxlib"
-
-// load common settings
-Common.settings
-
-// disable publishing for root project
-publish := { }
-
-lazy val root =
-	Project(id = "auxlib", base = file("."))
-		.aggregate (auxlibOpt, auxlibLog, auxlibTrove)
-		.dependsOn (auxlibOpt, auxlibLog, auxlibTrove)
 
 // auxlib-opt
-lazy val auxlibOpt =
-	Project(id = "auxlib-opt", base = file("auxlib-opt"))
-		.settings(Common.publishSettings)
+lazy val auxlibOpt = Project("auxlib-opt", file("auxlib-opt"))
 
 // auxlib-log
-lazy val auxlibLog =
-	Project(id = "auxlib-log", base = file("auxlib-log"))
-		.settings(Common.publishSettings)
+lazy val auxlibLog = Project("auxlib-log", file("auxlib-log"))
+  .settings(libraryDependencies += Dependencies.Logback)
+  .settings(libraryDependencies += Dependencies.Slf4j)
 
 // auxlib-trove
-lazy val auxlibTrove =
-	Project(id = "auxlib-trove", base = file("auxlib-trove"))
-		.settings(Common.publishSettings)
-
+lazy val auxlibTrove = Project("auxlib-trove", file("auxlib-trove"))
+	.settings(libraryDependencies += Dependencies.Trove4j)
 
 // auxlib-examples
-//lazy val auxlibExamples =
-//	Project(id = "auxlib-examples", base = file("examples"))
-//		.dependsOn (auxlibOpt, auxlibLog, auxlibTrove)
+lazy val auxlibExamples = Project(id = "auxlib-examples", base = file("examples"))
+	.settings(publish := { }, publishLocal := { })
+  .settings(libraryDependencies += Dependencies.Logback)
+  .settings(libraryDependencies += Dependencies.Slf4j)
+	.dependsOn(auxlibOpt, auxlibLog, auxlibTrove)
 
-
+// root project
+lazy val root = Project("auxlib", file("."))
+	.settings(Seq(publish := { }, publishLocal := { }))
+	.aggregate(auxlibOpt, auxlibLog, auxlibTrove, auxlibExamples)

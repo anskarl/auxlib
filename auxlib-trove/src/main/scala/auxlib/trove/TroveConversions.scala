@@ -6,30 +6,13 @@
  * | (_| | |_| |>  <  / ^ \| | |_) |     | |_| | | (_) \ V /  __/
  *  \__,_|\__,_/_/\_\/_/ \_\_|_.__/       \__|_|  \___/ \_/ \___|
  *  
- *
- * Copyright (C) 2014  Anastasios Skarlatidis.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published 
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
  */
  
 package auxlib.trove
 
 import gnu.trove.iterator._
+import scala.language.implicitConversions
 
-/**
- * @author Anastasios Skarlatidis
- */
 object TroveConversions {
 
   //===================== Byte =====================
@@ -41,21 +24,21 @@ object TroveConversions {
   }
 
   case class TByteIteratorWrapper(underlying: Iterator[Byte]) extends TByteIterator {
-    def next() = underlying.next()
+    def next(): Byte = underlying.next()
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
   }
 
   case class ScalaIteratorByteWrapper(underlying: TByteIterator) extends Iterator[Byte] {
-    def next() = underlying.next
+    def next(): Byte = underlying.next
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   // Byte to Byte iterator
-  implicit def asScalaIteratorByteByte(i: TByteByteIterator) = i match {
+  implicit def asScalaIteratorByteByte(i: TByteByteIterator): Iterator[(Byte, Byte)] = i match {
     case TByteByteIteratorWrapper(wrapped) => wrapped
     case _ => ScalaIteratorByteByte(i)
   }
@@ -70,13 +53,13 @@ object TroveConversions {
 
     def setValue(p1: Byte) = throw new UnsupportedOperationException
 
-    def value() = tuple._2
+    def value(): Byte = tuple._2
 
-    def key() = tuple._1
+    def key(): Byte = tuple._1
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   case class ScalaIteratorByteByte(underlying: TByteByteIterator) extends Iterator[(Byte, Byte)] {
@@ -86,11 +69,11 @@ object TroveConversions {
       (underlying.key(), underlying.value())
     }
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   // Byte to Short iterator
-  implicit def asScalaIteratorByteShort(i: TByteShortIterator) = i match {
+  implicit def asScalaIteratorByteShort(i: TByteShortIterator): Iterator[(Byte, Short)] = i match {
     case TByteShortIteratorWrapper(wrapped) => wrapped
     case _ => ScalaIteratorByteShort(i)
   }
@@ -105,13 +88,13 @@ object TroveConversions {
 
     def setValue(p1: Short) = throw new UnsupportedOperationException
 
-    def value() = tuple._2
+    def value(): Short = tuple._2
 
-    def key() = tuple._1
+    def key(): Byte = tuple._1
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   case class ScalaIteratorByteShort(underlying: TByteShortIterator) extends Iterator[(Byte, Short)] {
@@ -121,11 +104,11 @@ object TroveConversions {
       (underlying.key(), underlying.value())
     }
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   // Byte to Int iterator
-  implicit def asScalaIteratorByteInt(i: TByteIntIterator) = i match {
+  implicit def asScalaIteratorByteInt(i: TByteIntIterator): Iterator[(Byte, Int)] = i match {
     case TByteIntIteratorWrapper(wrapped) => wrapped
     case _ => ScalaIteratorByteInt(i)
   }
@@ -140,13 +123,13 @@ object TroveConversions {
 
     def setValue(p1: Int) = throw new UnsupportedOperationException
 
-    def value() = tuple._2
+    def value(): Int = tuple._2
 
-    def key() = tuple._1
+    def key(): Byte = tuple._1
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   case class ScalaIteratorByteInt(underlying: TByteIntIterator) extends Iterator[(Byte, Int)] {
@@ -156,11 +139,11 @@ object TroveConversions {
       (underlying.key(), underlying.value())
     }
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   // Byte to Long iterator
-  implicit def asScalaIteratorByteLong(i: TByteLongIterator) = i match {
+  implicit def asScalaIteratorByteLong(i: TByteLongIterator): Iterator[(Byte, Long)] = i match {
     case TByteLongIteratorWrapper(wrapped) => wrapped
     case _ => ScalaIteratorByteLong(i)
   }
@@ -175,13 +158,13 @@ object TroveConversions {
 
     def setValue(p1: Long) = throw new UnsupportedOperationException
 
-    def value() = tuple._2
+    def value(): Long = tuple._2
 
-    def key() = tuple._1
+    def key(): Byte = tuple._1
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   case class ScalaIteratorByteLong(underlying: TByteLongIterator) extends Iterator[(Byte, Long)] {
@@ -191,11 +174,11 @@ object TroveConversions {
       (underlying.key(), underlying.value())
     }
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   // Byte to Float iterator
-  implicit def asScalaIteratorByteFloat(i: TByteFloatIterator) = i match {
+  implicit def asScalaIteratorByteFloat(i: TByteFloatIterator): Iterator[(Byte, Float)] = i match {
     case TByteFloatIteratorWrapper(wrapped) => wrapped
     case _ => ScalaIteratorByteFloat(i)
   }
@@ -210,13 +193,13 @@ object TroveConversions {
 
     def setValue(p1: Float) = throw new UnsupportedOperationException
 
-    def value() = tuple._2
+    def value(): Float = tuple._2
 
-    def key() = tuple._1
+    def key(): Byte = tuple._1
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   case class ScalaIteratorByteFloat(underlying: TByteFloatIterator) extends Iterator[(Byte, Float)] {
@@ -226,11 +209,11 @@ object TroveConversions {
       (underlying.key(), underlying.value())
     }
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   // Byte to Double iterator
-  implicit def asScalaIteratorByteDouble(i: TByteDoubleIterator) = i match {
+  implicit def asScalaIteratorByteDouble(i: TByteDoubleIterator): Iterator[(Byte, Double)] = i match {
     case TByteDoubleIteratorWrapper(wrapped) => wrapped
     case _ => ScalaIteratorByteDouble(i)
   }
@@ -245,13 +228,13 @@ object TroveConversions {
 
     def setValue(p1: Double) = throw new UnsupportedOperationException
 
-    def value() = tuple._2
+    def value(): Double = tuple._2
 
-    def key() = tuple._1
+    def key(): Byte = tuple._1
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   case class ScalaIteratorByteDouble(underlying: TByteDoubleIterator) extends Iterator[(Byte, Double)] {
@@ -261,11 +244,11 @@ object TroveConversions {
       (underlying.key(), underlying.value())
     }
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   // Byte to Object iterator
-  implicit def asScalaIteratorByteObject[T](i: TByteObjectIterator[T]) = i match {
+  implicit def asScalaIteratorByteObject[T](i: TByteObjectIterator[T]): Iterator[(Byte, T)] = i match {
     case TByteObjectIteratorWrapper(wrapped) => wrapped
     case _ => ScalaIteratorByteObject[T](i)
   }
@@ -280,13 +263,13 @@ object TroveConversions {
 
     def setValue(p1: T) = throw new UnsupportedOperationException
 
-    def value() = tuple._2
+    def value(): T = tuple._2
 
-    def key() = tuple._1
+    def key(): Byte = tuple._1
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   case class ScalaIteratorByteObject[T](underlying: TByteObjectIterator[T]) extends Iterator[(Byte, T)] {
@@ -296,7 +279,7 @@ object TroveConversions {
       (underlying.key(), underlying.value())
     }
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
 
@@ -318,17 +301,17 @@ object TroveConversions {
   }
 
   case class TShortIteratorWrapper(underlying: Iterator[Short]) extends TShortIterator {
-    def next() = underlying.next()
+    def next(): Short = underlying.next()
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
   }
 
   case class ScalaIteratorShortWrapper(underlying: TShortIterator) extends Iterator[Short] {
-    def next() = underlying.next
+    def next(): Short = underlying.next
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   //===================== Int =====================
@@ -339,17 +322,17 @@ object TroveConversions {
   }
 
   case class TIntIteratorWrapper(underlying: Iterator[Int]) extends TIntIterator {
-    def next() = underlying.next()
+    def next(): Int = underlying.next()
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
   }
 
   case class ScalaIteratorIntWrapper(underlying: gnu.trove.iterator.TIntIterator) extends Iterator[Int] {
-    def next() = underlying.next
+    def next(): Int = underlying.next
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   //===================== (Int, Object) =====================
@@ -360,39 +343,40 @@ object TroveConversions {
 
   implicit def tIntObjectHashMapToScalaIterator[T](i: gnu.trove.map.TIntObjectMap[T]): Iterator[(Int, T)] = i.iterator()
 
-  implicit def tIntObjectHashMapToScalaIterable[T](i: gnu.trove.map.TIntObjectMap[T]) = new Iterable[(Int, T)]{
-    override def iterator = i.iterator()
+  implicit def tIntObjectHashMapToScalaIterable[T](i: gnu.trove.map.TIntObjectMap[T]): Iterable[(Int, T)] = {
+    new Iterable[(Int, T)] {
+      override def iterator: Iterator[(Int, T)] = i.iterator()
+    }
   }
-
 
   case class TIntObjectIteratorWrapper[T](underlying: Iterator[(Int, T)]) extends TIntObjectIterator[T] {
       private var _key: Int = _
       private var _value: T = _
 
 
-      override def key() = _key
+      override def key(): Int = _key
 
       override def setValue(p1: T) = throw new UnsupportedOperationException
 
-      override def value() = _value
+      override def value(): T = _value
 
-      override def advance() = {
+      override def advance(): Unit = {
         val (fetchedKey, fetchedValue) = underlying.next()
         _key = fetchedKey
         _value = fetchedValue
       }
 
-      override def hasNext = underlying.hasNext
-        def remove() = throw new UnsupportedOperationException
+      override def hasNext: Boolean = underlying.hasNext
+        def remove(): Unit = throw new UnsupportedOperationException
     }
 
     case class ScalaIteratorIntObjectWrapper[T](underlying: gnu.trove.iterator.TIntObjectIterator[T]) extends Iterator[(Int, T)] {
-      def next() = {
+      def next(): (Int, T) = {
         underlying.advance()
         (underlying.key(), underlying.value())
       }
 
-      def hasNext = underlying.hasNext
+      def hasNext: Boolean = underlying.hasNext
     }
 
   //===================== Long =====================
@@ -402,17 +386,17 @@ object TroveConversions {
   }
 
   case class TLongIteratorWrapper(underlying: Iterator[Long]) extends TLongIterator {
-    def next() = underlying.next()
+    def next(): Long = underlying.next()
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
   }
 
   case class ScalaIteratorLongWrapper(underlying: gnu.trove.iterator.TLongIterator) extends Iterator[Long] {
-    def next() = underlying.next
+    def next(): Long = underlying.next
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   //===================== Float =====================
@@ -422,17 +406,17 @@ object TroveConversions {
   }
 
   case class TFloatIteratorWrapper(underlying: Iterator[Float]) extends TFloatIterator {
-    def next() = underlying.next()
+    def next(): Float = underlying.next()
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
   }
 
   case class ScalaIteratorFloatWrapper(underlying: gnu.trove.iterator.TFloatIterator) extends Iterator[Float] {
-    def next() = underlying.next
+    def next(): Float = underlying.next
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 
   //===================== Double =====================
@@ -442,16 +426,16 @@ object TroveConversions {
   }
 
   case class TDoubleIteratorWrapper(underlying: Iterator[Double]) extends TDoubleIterator {
-    def next() = underlying.next()
+    def next(): Double = underlying.next()
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
 
-    def remove() = throw new UnsupportedOperationException
+    def remove(): Unit = throw new UnsupportedOperationException
   }
 
   case class ScalaIteratorDoubleWrapper(underlying: gnu.trove.iterator.TDoubleIterator) extends Iterator[Double] {
-    def next() = underlying.next
+    def next(): Double = underlying.next
 
-    def hasNext = underlying.hasNext
+    def hasNext: Boolean = underlying.hasNext
   }
 }

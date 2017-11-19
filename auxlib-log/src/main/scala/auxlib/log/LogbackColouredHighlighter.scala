@@ -8,20 +8,6 @@
  *                                                 __/ |
  *                                                |___/    
  *
- * Copyright (C) 2014  Anastasios Skarlatidis.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published 
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
  */
 
 package auxlib.log
@@ -32,13 +18,12 @@ import ch.qos.logback.core.pattern.color.ForegroundCompositeConverterBase
 
 import scala.annotation.switch
 
-/**
- * @author Anastasios Skarlatidis
- */
-final class LogbackColouredHighlighter extends ForegroundCompositeConverterBase[ILoggingEvent] {
+class LogbackColouredHighlighter extends ForegroundCompositeConverterBase[ILoggingEvent] {
+
+  import LogbackColouredHighlighter._
 
   override def getForegroundColorCode(event: ILoggingEvent): String =
-    ( event.getLevel.levelInt: @switch) match {
+    (event.getLevel.levelInt: @switch) match {
       case Level.ERROR_INT => STYLE_ERROR
       case Level.WARN_INT => STYLE_WARN
       case Level.INFO_INT => STYLE_INFO
@@ -46,5 +31,13 @@ final class LogbackColouredHighlighter extends ForegroundCompositeConverterBase[
       case Level.TRACE_INT => STYLE_TRACE
       case _ => DEFAULT_FG
     }
+}
 
+object LogbackColouredHighlighter {
+  val DEFAULT_FG: String = "39"
+  val STYLE_ERROR = "31" // Red
+  val STYLE_WARN = "33" // Orange
+  val STYLE_INFO = "32" // Green
+  val STYLE_DEBUG = "34" // Blue
+  val STYLE_TRACE = "35" // Magenta
 }

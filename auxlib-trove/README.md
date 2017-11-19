@@ -1,6 +1,6 @@
 ## auxlib-trove: auxiliary library for Scala - Trove interoperabilty 
 
-A collection of utility classes and functions for Scala friendly interoperabilty with [Trove](http://trove.starlight-systems.com) high-performance collections for Java.
+A collection of utility classes and functions for Scala friendly interoperability with [Trove](http://trove.starlight-systems.com) high-performance collections for Java.
 
 ## Licence 
 
